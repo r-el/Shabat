@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace shabat2.Models
 {
-
     // המרת תמונה
     public class ParsePhoto
     {

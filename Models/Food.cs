@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace shabat2.Models
 {
+    // מאכל
     public class Food
     {
         [Key]
