@@ -11,7 +11,7 @@ namespace shabat2.Models
     {
         private static DAL Data;
         // חיבור פרטי. גישה לדטאבייס מוגבלת 
-        private DAL() : base("data source=localhost\\SQLEXPRESS;"
+        private DAL() : base("data source=ASUS-LAPTOP\\SQLEXPRESS;"
                                 + " initial catalog = ShabatCore;"
                                 + " user id = sa; password = 1234;")
         {

@@ -20,6 +20,7 @@ namespace shabat2.Controllers
 
         public IActionResult Index()
         {
+            DAL.Get.Categories.ToList();
             return View();
         }
 

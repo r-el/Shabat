@@ -19,11 +19,13 @@ namespace shabat2.Models
         [Display(Name = "תמונה")]
         public byte[] Photo { get; set; }
 
+        // רשימת מאכלים
+        public List<FoodByGuest> Guests { get; set; }
 
         // המרת התמונה לבייטים
         public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
 
-        // קטגוריה
+        // קטגוריה 
         public Category Category { get; set; }
     }
 }
