@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace shabat2.Models
 {
+    // קטגוריה
     public class Category
     {
         public Category() { Foods = new List<Food>(); }
@@ -24,5 +25,18 @@ namespace shabat2.Models
 
         // המרת התמונה לבייטים
         public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
+
+        // יצירה והוספה של מאכל חדש
+        public void AddFood(string name, IFormFile file)
+        {
+            AddFood(new Food() { FoodName = name, SetPhoto = file });
+        }
+
+        // הוספת מאכל קיים
+        public void AddFood(Food food)
+        {
+            Foods.Add(food);
+            food.Category = this;
+        }
     }
 }
