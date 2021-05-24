@@ -22,5 +22,8 @@ namespace shabat2.Models
 
         // המרת התמונה לבייטים
         public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
+
+        // קטגוריה
+        public Category Category { get; set; }
     }
 }
