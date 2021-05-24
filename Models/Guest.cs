@@ -32,5 +32,8 @@ namespace shabat2.Models
 
         // המרת התמונה לבייטים
         public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
+
+        // רשימת מאכלים
+        public List<FoodByGuest> Foods { get; set; }
     }
 }
