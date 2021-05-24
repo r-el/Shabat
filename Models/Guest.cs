@@ -29,5 +29,8 @@ namespace shabat2.Models
         [Display(Name = "כתובת מייל")]
         [EmailAddress(ErrorMessage ="נא הכנס כתובת מייל נכונה")]
         public string Mail { get; set; }
+
+        // המרת התמונה לבייטים
+        public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
     }
 }
