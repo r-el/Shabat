@@ -20,7 +20,7 @@ namespace shabat2.Models
             MemoryStream stream = new MemoryStream();
             file.CopyTo(stream);
 
-            // תמיר אותו למערך בייטים
+            // תמיר ותחזיר אותו למערך בייטים
             return stream.ToArray();
         }
     }

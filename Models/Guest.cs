@@ -29,11 +29,17 @@ namespace shabat2.Models
         [Display(Name = "כתובת מייל")]
         [EmailAddress(ErrorMessage ="נא הכנס כתובת מייל נכונה")]
         public string Mail { get; set; }
+        
+        // רשימת מאכלים
+        public List<FoodByGuest> Foods { get; set; }
 
         // המרת התמונה לבייטים
         public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
 
-        // רשימת מאכלים
-        public List<FoodByGuest> Foods { get; set; }
+        // הוספת מאכל לרשימת מאכלים
+        public void AddFood(Food food)
+        {
+            Foods.Add(new FoodByGuest() { Food = food, Guest = this });
+        }
     }
 }
