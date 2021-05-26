@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using shabat2.ViewModel;
 
 namespace shabat2.Controllers
 {
@@ -11,6 +13,14 @@ namespace shabat2.Controllers
     {
         public IActionResult Index()
         {
+            // טען מהדטאבייס את הנתונים ותחזיר לוויו
+            List<Category> categories = DAL.Get.Categories.Include(c=>c.Foods).ToList();
+            List<Guest> guests = DAL.Get.Guests.Include(g=>g.Foods).ToList();
+            VMHostMain vMHostMain = new VMHostMain
+            {
+                Categories = categories,
+                Guests = guests
+            };
             return View();
         }
     }
