@@ -20,8 +20,8 @@ namespace shabat2.Controllers
 
         public IActionResult Index()
         {
-            DAL.Get.Categories.ToList();
-            return View();
+            List<Category> categories=DAL.Get.Categories.ToList();
+            return View(categories);
         }
 
         public IActionResult Privacy()
