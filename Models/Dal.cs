@@ -33,9 +33,9 @@ namespace shabat2.Models
         // זריעה של נתונים לדטאבייס
         private void Seed()
         {
-            Category category = new Category { CategoryNmae = "שתיה קלה" };
+            Category category = new Category { CategoryName = "שתיה קלה" };
             Categories.Add(category);
-            Guests.Add(new Guest { FirstName = "אריאל", LastName = "תנעמי" });
+            Guests.Add(new Guest { FirstName = "אברהם", LastName = "קהאן" });
             SaveChanges();
         }
 

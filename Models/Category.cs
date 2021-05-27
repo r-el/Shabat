@@ -15,7 +15,7 @@ namespace shabat2.Models
         public int ID { get; set; }
 
         [Display(Name = "שם קבוצה")]
-        public string CategoryNmae { get; set; }
+        public string CategoryName { get; set; }
 
         [Display(Name = "תמונה")]
         public byte[] Photo { get; set; }

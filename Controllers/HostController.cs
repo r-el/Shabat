@@ -16,12 +16,12 @@ namespace shabat2.Controllers
             // טען מהדטאבייס את הנתונים ותחזיר לוויו
             List<Category> categories = DAL.Get.Categories.Include(c=>c.Foods).ToList();
             List<Guest> guests = DAL.Get.Guests.Include(g=>g.Foods).ToList();
-            VMHostMain vMHostMain = new VMHostMain
+            VMHostMain vm = new VMHostMain
             {
                 Categories = categories,
                 Guests = guests
             };
-            return View();
+            return View(vm);
         }
     }
 }
