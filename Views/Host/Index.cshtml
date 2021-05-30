@@ -1,0 +1,58 @@
+@model shabat2.ViewModel.VMHostMain
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>תוכנת מארח</h1>
+
+<p>
+    <a asp-action="AddCategory">הוספת קבוצה חדשה</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> @*שם קבוצה*@
+                @Html.DisplayNameFor(model => model.Categories.First().CategoryName)
+            </th>
+            <th>מאכלים בקבוצה</th>
+            <th> @*תמונה*@
+                @Html.DisplayNameFor(model => model.Categories.First().Photo)
+            </th>
+            <th>אפשרויות</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Categories) {
+        <tr>
+            <td>
+                @*שם קבוצה*@
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @*מאכלים בקבוצה*@
+                @if (item.Foods.Count > 0) @*אם יש מאכלים בקבוצה, תדפיס אותם*@
+                {
+                    <a asp-action="CategoryDetails" asp-route-id="@item.ID">מאכלים בקבוצה</a>
+
+                    @foreach(var food in item.Foods)
+                    { <a asp-action="FoodDetails" asp-route-id="@food.ID">@food.FoodName</a> }
+                }
+            </td>
+            <td>
+                @*תמונה*@
+                @if (item.Photo!=null)
+                    { <img src="data:image;base64,@System.Convert.ToBase64String(item.Photo)" width="80", height="60" /> }
+            </td>
+            <td>
+                @*אפשרויות*@
+                @Html.ActionLink("הוספת מאכל", "AddFood", new { id=item.ID }) |
+                @Html.ActionLink("עריכת קבוצה", "Edit", new { id=item.ID  }) |
+                @Html.ActionLink("פרטים", "Details", new { id=item.ID }) |
+                @Html.ActionLink("מחיקת קבוצה", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
