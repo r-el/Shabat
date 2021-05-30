@@ -23,5 +23,36 @@ namespace shabat2.Controllers
             };
             return View(vm);
         }
+        public IActionResult CategoryDetails(int? id)    /*פרטי קבוצה*/
+        {
+            // תחזיר את המשתמש ל-אינדקס id אם לא קיבלת
+            if (id == null) return RedirectToAction(nameof(Index));
+
+            // טען מהדטאבייס את הנתונים ותחזיר לוויו
+            Category category = DAL.Get.Categories.Include(c => c.Foods).ToList().Find(c => c.ID == id);
+            // אם לא נמצאו נתונים בדטאבייס תחזיר את המשתמש ל-אינדקס
+            if (category == null) return RedirectToAction(nameof(Index));
+            return View(category);
+        }
+        public IActionResult FoodDetails(int? id)       /*פרטי מאכל*/
+        {
+            // תחזיר את המשתמש ל-אינדקס id אם לא קיבלת
+            if (id == null) return RedirectToAction(nameof(Index));
+
+            // טען מהדטאבייס את הנתונים ותחזיר לוויו
+            Food food = DAL.Get.Foods.ToList().Find(f => f.ID == id);
+            // אם לא נמצאו נתונים בדטאבייס תחזיר את המשתמש ל-אינדקס
+            if (food == null) return RedirectToAction(nameof(Index));
+            return View(food);
+        }
+        public IActionResult AddCategory()      /*הוספת קבוצה*/
+        {
+            return View();
+        }
+        public IActionResult AddFood(int? id)   /*הוספת מאכל*/
+        {
+            return View();
+        }
+
     }
 }
