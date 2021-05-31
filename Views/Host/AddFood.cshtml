@@ -1,0 +1,56 @@
+﻿@model shabat2.ViewModel.VMAddFood
+
+@{
+    ViewData["Title"] = "הוספת מאכל";
+}
+
+<h1>@("הוספת מאכל ל"+Model.Category.CategoryName)</h1>
+
+<h4>@(Model.Category.CategoryName)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddFood" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Category.ID" class="control-label">בחירת קבוצה</label>
+                <select asp-for="Category.ID" class="form-control" >
+                @foreach (Category category in Model.Categories)
+                {
+                    if (category.ID == Model.CategoryId)
+                    {
+                        <option class="form-control" id="@category.ID" value="@category.ID" selected="selected">@category.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option class="form-control" id="@category.ID" value="@category.ID"> @category.CategoryName </option>
+
+                    }
+                }
+                </select>
+                <span asp-validation-for="Category.ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Food.ID" class="control-label"></label>
+                <input asp-for="Food.FoodName" class="form-control" />
+                <span asp-validation-for="Food.FoodName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input type="file" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="הוסף מאכל" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
