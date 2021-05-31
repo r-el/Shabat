@@ -42,6 +42,16 @@ namespace shabat2.Controllers
             VMAddCategory vm = new VMAddCategory { Category = new Category() };
             return View(vm);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddCategory(VMAddCategory vm)
+        {
+            if (vm.Food != string.Empty) vm.Category.AddFood(vm.Food, vm.FoodFile);
+            vm.Category.SetPhoto = vm.File;
+            DAL.Get.Categories.Add(vm.Category);
+            DAL.Get.SaveChanges();
+            return View("CategoryDetails", vm.Category);
+        }
 
         public IActionResult AddFood(int? id)
         {// הוספת מאכל
@@ -58,7 +68,6 @@ namespace shabat2.Controllers
             };
             return View(vm);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddFood(VMAddFood vm)
