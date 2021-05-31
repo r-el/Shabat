@@ -45,7 +45,18 @@ namespace shabat2.Controllers
 
         public IActionResult AddFood(int? id)
         {// הוספת מאכל
-            return View();
+            if (id == null) return RedirectToAction(nameof(Index));
+            List<Category> categories = DAL.Get.Categories.Include(c => c.Foods).ToList();
+            Category category = categories.Find(c => c.ID == id);
+            if (category == null) return RedirectToAction(nameof(Index));
+            VMAddFood vm = new VMAddFood
+            {
+                Categories = categories,
+                Category = category,
+                CategoryId = category.ID,
+                Food = new Food()
+            };
+            return View(vm);
         }
     }
 }
