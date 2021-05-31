@@ -39,8 +39,8 @@ namespace shabat2.Controllers
 
         public IActionResult AddCategory()
         {// הוספת קבוצה
-            Category category = new Category();
-            return View(category);
+            VMAddCategory vm = new VMAddCategory { Category = new Category() };
+            return View(vm);
         }
 
         public IActionResult AddFood(int? id)
