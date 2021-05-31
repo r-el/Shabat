@@ -58,5 +58,15 @@ namespace shabat2.Controllers
             };
             return View(vm);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddFood(VMAddFood vm)
+        {
+            DAL.Get.Categories.ToList().Find(c => c.ID == vm.CategoryId).AddFood(vm.Food);
+            vm.Food.SetPhoto = vm.File;
+            DAL.Get.SaveChanges();
+            return RedirectToAction(nameof(CategoryDetails), new { id = vm.CategoryId });
+        }
     }
 }

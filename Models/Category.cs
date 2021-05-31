@@ -14,6 +14,7 @@ namespace shabat2.Models
         [Key]
         public int ID { get; set; }
 
+        [Required]
         [Display(Name = "שם קבוצה")]
         public string CategoryName { get; set; }
 
