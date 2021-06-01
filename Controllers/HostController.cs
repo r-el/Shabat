@@ -21,19 +21,19 @@ namespace shabat2.Controllers
 
         public IActionResult CategoryDetails(int? id)
         {// פרטי קבוצה
-            if (id == null) return RedirectToAction(nameof(Index));
+            if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
 
             Category category = DAL.Get.Categories.Include(c => c.Foods).ToList().Find(c => c.ID == id);
-            if (category == null) return RedirectToAction(nameof(Index));
+            if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             return View(category);
         }
 
         public IActionResult FoodDetails(int? id)
         {// פרטי מאכל
-            if (id == null) return RedirectToAction(nameof(Index));
+            if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
 
             Food food = DAL.Get.Foods.ToList().Find(f => f.ID == id);
-            if (food == null) return RedirectToAction(nameof(Index));
+            if (food == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             return View(food);
         }
 
@@ -55,10 +55,10 @@ namespace shabat2.Controllers
 
         public IActionResult AddFood(int? id)
         {// הוספת מאכל
-            if (id == null) return RedirectToAction(nameof(Index));
+            if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             List<Category> categories = DAL.Get.Categories.Include(c => c.Foods).ToList();
             Category category = categories.Find(c => c.ID == id);
-            if (category == null) return RedirectToAction(nameof(Index));
+            if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             VMAddFood vm = new VMAddFood
             {
                 Categories = categories,

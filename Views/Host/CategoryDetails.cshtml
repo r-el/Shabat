@@ -1,30 +1,60 @@
 ﻿@model shabat2.Models.Category
+@{ ViewData["Title"] = "פרטי קבוצה"; }
 
-@{
-    ViewData["Title"] = "CategoryDetails";
-}
+<h1>פרטי קבוצה</h1>
+<hr />
 
-<h1>CategoryDetails</h1>
+@* אם יש תמונה תדפיס אותה *@
+@if (Model.Photo != null)
+ {
+    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo)" width="120" , height="90" />
+ }
+
+@* אם יש מאכלים תדפיס אותם *@
+@if (Model.Foods.Count > 0)
+ {
+    <h4>@("מאכלים ב"+Model.CategoryName)</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                @*שם קטגוריה*@
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                @*תמונה*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Food food in Model.Foods)
+            {
+                <tr>
+                    @*שם מאכל*@
+                    <td>
+                        <a asp-action="FoodDetails" asp-route-id="@food.ID"> @Html.DisplayFor(modelItem => food.FoodName) </a>
+                    </td>
+                    @*תמונת מאכל*@
+                    <td>
+                        @if (Model.Photo != null)@* אם יש תמונה תדפיס אותה*@
+                         {
+                            <a asp-action="FoodDetails" asp-route-id="@food.ID"> <img src="data:image;base64,@System.Convert.ToBase64String(food.Photo)" width="80" , height="60" /> </a>
+                         }
+                    </td>
+                    @*אפשרויות*@
+                    <td>
+                        @Html.ActionLink("עריכת פרטי מאכל", "EditFood", new { id = food.ID }) |
+                        @Html.ActionLink("מחיקת מאכל", "DeleteFood", new { id = food.ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+ }
 
 <div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("הוספת מאכל", "AddFood", new { id = Model.ID }) | @*הוספת מאכל*@
+    <a asp-action="Index">חזרה לחלון הראשי</a>
 </div>
