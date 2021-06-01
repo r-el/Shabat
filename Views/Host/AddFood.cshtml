@@ -13,8 +13,8 @@
         <form asp-action="AddFood" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Category.ID" class="control-label">בחירת קבוצה</label>
-                <select asp-for="Category.ID" class="form-control" >
+                <label asp-for="CategoryId" class="control-label">בחירת קבוצה</label>
+                <select asp-for="CategoryId" class="form-control" >
                 @foreach (Category category in Model.Categories)
                 {
                     if (category.ID == Model.CategoryId)
@@ -28,12 +28,12 @@
                     }
                 }
                 </select>
-                <span asp-validation-for="Category.ID" class="text-danger"></span>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Food.FoodName" class="control-label"></label>
-                <input asp-for="Food.FoodName" class="form-control" />
-                <span asp-validation-for="Food.FoodName" class="text-danger"></span>
+                <label asp-for="Food" class="control-label"></label>
+                <input asp-for="Food" class="form-control" />
+                <span asp-validation-for="Food" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="File" class="control-label"></label>

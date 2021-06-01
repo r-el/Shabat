@@ -15,7 +15,7 @@ namespace shabat2.ViewModel
         public Category Category { get; set; }          // קבוצה
         public int CategoryId { get; set; }             // מזהה קטגוריה
         public List<Category> Categories { get; set; }  // רשימת קבוצות
-        public Food Food { get; set; }                  // מאכל
+        public string Food { get; set; }                // מאכל
         [Display(Name = "הוספת תמונה")]
         public IFormFile File { get; set; }             // תמונה
     }

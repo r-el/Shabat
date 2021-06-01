@@ -64,7 +64,6 @@ namespace shabat2.Controllers
                 Categories = categories,
                 Category = category,
                 CategoryId = category.ID,
-                Food = new Food()
             };
             return View(vm);
         }
@@ -72,8 +71,7 @@ namespace shabat2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddFood(VMAddFood vm)
         {
-            DAL.Get.Categories.ToList().Find(c => c.ID == vm.CategoryId).AddFood(vm.Food);
-            vm.Food.SetPhoto = vm.File;
+            DAL.Get.Categories.ToList().Find(c => c.ID == vm.CategoryId).AddFood(vm.Food, vm.File);
             DAL.Get.SaveChanges();
             return RedirectToAction(nameof(CategoryDetails), new { id = vm.CategoryId });
         }
