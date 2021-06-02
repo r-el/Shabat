@@ -1,0 +1,67 @@
+﻿@model shabat2.Models.Food
+@{ViewData["Title"] = "FoodDetails";}
+
+<h1>@(Model.FoodName)</h1>
+
+<hr />
+
+@if (Model.Photo != null)
+{
+    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo)" width="120" , height="90" />
+}
+
+@*אם יש עוד מאכלים בקטגוריה תדפיס אותם*@
+@if (Model.Category.Foods.Count > 1)
+{
+    <hr />
+    <h4>@("מאכלים ב"+Model.Category.CategoryName)</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*שם מאכל*@
+                    @Html.DisplayNameFor(model => model.FoodName)
+                </th>
+                <th>
+                    @*תמונת מאכל*@
+                    @Html.DisplayNameFor(model => model.Photo)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Food food in Model.Category.Foods)
+             {
+                if (!food.Equals(Model))// הדפס את כל המאכלים בקטגוריה חוץ מן המאכל עצמו
+                {
+                <tr>
+                    <td>
+                        <a asp-action="FoodDetails" asp-route-id="@food.ID">
+                            @*שם מאכל*@
+                            @Html.DisplayFor(modelItem => food.FoodName)
+                        </a>
+                    </td>
+                    <td>
+                        @*תמונת מאכל*@
+                        @if (Model.Photo != null)
+                        {
+                            <a asp-action="FoodDetails" asp-route-id="@food.ID">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(food.Photo)" width="80" , height="60" />
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("עריכת פרטי מאכל", "EditFood", new { id = food.ID }) |
+                        @Html.ActionLink("מחיקת מאכל", "DeleteFood", new { id = food.ID })
+                    </td>
+                </tr>
+                }
+             }
+        </tbody>
+    </table>
+}
+
+<div>
+    @Html.ActionLink("עריכת מאכל", "EditFood", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">חזרה לרשימה</a>
+</div>

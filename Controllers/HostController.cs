@@ -13,7 +13,9 @@ namespace shabat2.Controllers
     {
         public IActionResult Index()
         {
+            // טען מהדטאבייס את כל הקטגוריות עם המאכלים
             List<Category> categories = DAL.Get.Categories.Include(c=>c.Foods).ToList();
+            // טען מהדטאבייס את כל האורחים
             List<Guest> guests = DAL.Get.Guests.Include(g=>g.Foods).ToList();
             VMHostMain vm = new VMHostMain{ Categories = categories, Guests = guests };
             return View(vm);
@@ -23,6 +25,7 @@ namespace shabat2.Controllers
         {// פרטי קבוצה
             if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
 
+            // טען מהדטאבייס את הקטגוריה עם המאכלים שלו
             Category category = DAL.Get.Categories.Include(c => c.Foods).ToList().Find(c => c.ID == id);
             if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             return View(category);
@@ -32,7 +35,8 @@ namespace shabat2.Controllers
         {// פרטי מאכל
             if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
 
-            Food food = DAL.Get.Foods.ToList().Find(f => f.ID == id);
+            // טען מהדטאבייס את המאכל עם הקטגוריה שלו
+            Food food = DAL.Get.Foods.Include(f=>f.Category).ToList().Find(f => f.ID == id);
             if (food == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             return View(food);
         }
