@@ -134,5 +134,13 @@ namespace shabat2.Controllers
             DAL.Get.SaveChanges();
             return View("FoodDetails", food);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            // טען מהדטאבייס את הקטגוריה
+            Category category = DAL.Get.Categories.ToList().Find(c=> c.ID ==id);
+            if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
+            return View(category);
+        }
     }
 }
