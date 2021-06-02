@@ -84,8 +84,7 @@ namespace shabat2.Controllers
         }
 
         public IActionResult Edit(int? id)
-        {
-            // עריכת קטגוריה
+        { // עריכת קטגוריה
             if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             // טען מהדטאבייס את הקטגוריה
             Category category = DAL.Get.Categories.ToList().Find(c => c.ID == id);
