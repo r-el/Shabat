@@ -110,5 +110,16 @@ namespace shabat2.Controllers
             DAL.Get.SaveChanges();
             return View("CategoryDetails", category);
         }
+
+        public IActionResult EditFood(int? id)
+        {// עריכת מאכל
+            if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
+            // טען מהדטאבייס את הקטגוריה
+            Food food= DAL.Get.Foods.ToList().Find(f => f.ID == id);
+            if (food == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
+            // השמת נתונים
+            VMEditFood vM = new VMEditFood { Food = food, FoodID = food.ID };
+            return View(vM);
+        }
     }
 }
