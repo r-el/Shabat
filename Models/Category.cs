@@ -25,7 +25,7 @@ namespace shabat2.Models
         public List<Food> Foods { get; set; }
 
         // המרת התמונה לבייטים
-        public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
+        public IFormFile SetPhoto { set { if (value != null) Photo = new ParsePhoto().Get(value); } }
 
         // יצירה והוספה של מאכל חדש
         public void AddFood(string name, IFormFile file)

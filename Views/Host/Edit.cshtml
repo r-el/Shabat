@@ -17,6 +17,7 @@
                 <input asp-for="Category.CategoryName" class="form-control" />
                 <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
             </div>
+            @*תמונה*@
             @if (Model.Category.Photo != null) // אם יש תמונה תדפיס אותה
             {
                     <img src="data:image;base64,@System.Convert.ToBase64String(Model.Category.Photo)" width="80" , height="60" />

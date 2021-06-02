@@ -24,7 +24,7 @@ namespace shabat2.Models
         public List<FoodByGuest> Guests { get; set; }
 
         // המרת התמונה לבייטים
-        public IFormFile SetPhoto { set { Photo = new ParsePhoto().Get(value); } }
+        public IFormFile SetPhoto { set { if (value != null) Photo = new ParsePhoto().Get(value); } }
 
         // קטגוריה 
         public Category Category { get; set; }
