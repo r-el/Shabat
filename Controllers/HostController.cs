@@ -79,5 +79,17 @@ namespace shabat2.Controllers
             DAL.Get.SaveChanges();
             return RedirectToAction(nameof(CategoryDetails), new { id = vm.CategoryId });
         }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
+            Category category = DAL.Get.Categories.ToList().Find(c => c.ID == id);
+            if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
+            VMEditCategory vm = new VMEditCategory
+            {
+                Category = category,
+                CategoryID = category.ID
+            };
+            return View(vm);
+        }
     }
 }
