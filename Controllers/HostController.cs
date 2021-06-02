@@ -121,5 +121,18 @@ namespace shabat2.Controllers
             VMEditFood vM = new VMEditFood { Food = food, FoodID = food.ID };
             return View(vM);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditFood(VMEditFood vM)
+        {
+            // טען מהדטאבייס את המאכל עם הקטגוריה שלו
+            Food food = DAL.Get.Foods.Include(f => f.Category).ToList().Find(f => f.ID == vM.FoodID);
+            // השמת נתונים
+            food.FoodName = vM.Food.FoodName;
+            food.SetPhoto = vM.File;
+            // שמירת נתונים בדטאבייס
+            DAL.Get.SaveChanges();
+            return View("FoodDetails", food);
+        }
     }
 }
