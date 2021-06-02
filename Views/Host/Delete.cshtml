@@ -1,0 +1,23 @@
+﻿@model shabat2.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>מחיקת @Model.CategoryName</h1>
+
+<div>
+    <h4>@("האם אתה בטוח שברצונך למחוק את "+Model.CategoryName+" ?")</h4>
+    <hr />
+    @if (Model.Photo != null)
+    {
+        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo)" width="160" , height="120" />
+
+    }
+    <h2></h2>
+    <br />
+    <form asp-action="Delete">
+        <input type="submit" value="מחיקה" class="btn btn-danger" /> |
+        <a asp-action="Index">חזרה לרשימה</a>
+    </form>
+</div>
