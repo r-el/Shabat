@@ -1,0 +1,42 @@
+﻿@model shabat2.ViewModel.VMEditFood
+@{ViewData["Title"] = "EditFood";}
+
+<h1>עריכת @Model.Food.FoodName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditFood" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="FoodID" hidden="hidden" />
+            @*שם מאכל*@
+            <div class="form-group">
+                <label asp-for="Food.FoodName" class="control-label"></label>
+                <input asp-for="Food.FoodName" class="form-control" />
+                <span asp-validation-for="Food.FoodName" class="text-danger"></span>
+            </div>
+            @*תמונת מאכל קיימת*@
+            @if (Model.Food.Photo != null)
+            {
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.Food.Photo)" width="80" , height="60" />
+            }
+            @*תמונת מאכל חדשה*@
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input type="file" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="שמירת שינויים" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">חזרה לרשימה</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
