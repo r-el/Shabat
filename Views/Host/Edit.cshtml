@@ -1,0 +1,42 @@
+﻿@model shabat2.ViewModel.VMEditCategory
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>עריכת @Model.Category.CategoryName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="CategoryID" hidden="hidden" />
+            <div class="form-group">
+                <label asp-for="Category.CategoryName" class="control-label"></label>
+                <input asp-for="Category.CategoryName" class="form-control" />
+                <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+            </div>
+            @if (Model.Category.Photo != null) // אם יש תמונה תדפיס אותה
+            {
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Category.Photo)" width="80" , height="60" />
+            }
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="שמירת נתונים" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">חזרה לרשימה</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
