@@ -142,5 +142,13 @@ namespace shabat2.Controllers
             if (category == null) return RedirectToAction(nameof(Index)); // ודא קבלת ערך
             return View(category);
         }
+        [HttpPost]
+        public IActionResult Delete(Category category)
+        {
+            Category category1 = DAL.Get.Categories.Include(c => c.Foods).ToList().Find(c => c.ID == category.ID);
+            DAL.Get.Foods.RemoveRange(category1.Foods);
+            DAL.Get.Categories.Remove(category1);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
