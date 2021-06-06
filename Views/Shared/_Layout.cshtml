@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - תוכנה לאירוח שבת וחג</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/glyphicons-only-bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/bootstrap-v4-rtl/dist/css/bootstrap-rtl.min.css" rel="stylesheet" />
 </head>
@@ -22,7 +23,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">דף הבית</a>
                         </li>
-                        @if (DAL.Get.Categories.ToList().Count>0)
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Connect">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true">@DAL.Get.Guest.FullName</span></a>
+                        </li>
+                        @if (DAL.Get.Categories.ToList().Count > 0)
                         {
                             foreach (Category category in DAL.Get.Categories.ToList())
                             {
@@ -30,7 +35,7 @@
                                     <a class="nav-link text-dark" asp-controller="Home" asp-action="Category" asp-route-id="@category.ID">
                                         @category.CategoryName
                                         @if (category.Photo != null)
-                                        {<img src="data:image;base64,@System.Convert.ToBase64String(category.Photo)" width="40" , height="30" /> }
+                                        {<img src="data:image;base64,@System.Convert.ToBase64String(category.Photo)" width="40" , height="30" />}
                                     </a>
                                 </li>
                             }

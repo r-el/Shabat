@@ -10,6 +10,8 @@ namespace shabat2.Models
     public class DAL : DbContext
     {
         private static DAL Data;
+        public Guest Guest = new Guest { FirstName = "התחבר" };
+
         // חיבור פרטי. גישה לדטאבייס מוגבלת 
         private DAL() : base("data source=localhost\\SQLEXPRESS;"
                                 + " initial catalog = ShabatCore2;"
