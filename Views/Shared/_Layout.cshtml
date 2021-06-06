@@ -22,9 +22,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">דף הבית</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">פרטיות</a>
-                        </li>
+                        @if (DAL.Get.Categories.ToList().Count>0)
+                        {
+                            foreach (Category category in DAL.Get.Categories.ToList())
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Category" asp-route-id="@category.ID">
+                                        @category.CategoryName
+                                        @if (category.Photo != null)
+                                        {<img src="data:image;base64,@System.Convert.ToBase64String(category.Photo)" width="40" , height="30" /> }
+                                    </a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
