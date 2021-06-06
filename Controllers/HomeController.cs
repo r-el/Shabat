@@ -24,6 +24,15 @@ namespace shabat2.Controllers
             return View(categories);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register(Guest guest)
+        {// הרשמה
+            DAL.Get.Guests.Add(guest);
+            DAL.Get.SaveChanges();
+            return View("Index");
+        }
+
         public IActionResult Privacy()
         {
             return View();
