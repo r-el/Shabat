@@ -148,6 +148,7 @@ namespace shabat2.Controllers
             Category category1 = DAL.Get.Categories.Include(c => c.Foods).ToList().Find(c => c.ID == category.ID);
             DAL.Get.Foods.RemoveRange(category1.Foods);
             DAL.Get.Categories.Remove(category1);
+            DAL.Get.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
     }
