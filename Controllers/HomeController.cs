@@ -36,7 +36,7 @@ namespace shabat2.Controllers
             Guest guest1 = DAL.Get.Guests.ToList().Find(g => g.Mail == guest.Mail && g.Password == guest.Password); ;
             if (guest1 == null) return View(); // ודא קבלת ערך
             DAL.Get.Guest = guest1;
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace shabat2.Controllers
         {// הרשמה
             DAL.Get.Guests.Add(guest);
             DAL.Get.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
