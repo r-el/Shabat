@@ -10,7 +10,7 @@ namespace shabat2.Models
     // אורח
     public class Guest
     {
-        public Guest() {}
+        public Guest() { Foods = new List<FoodByGuest>(); }
         [Key]
         public int ID { get; set; }
 
@@ -25,8 +25,8 @@ namespace shabat2.Models
         [Display(Name = "שם מלא")]
         public string FullName { get { return FirstName + " " + LastName ; } }
 
-        [Display(Name = "תמונה")]
-        public byte[] Photo { get; set; }
+        //[Display(Name = "תמונה")]
+        //public byte[] Photo { get; set; }
 
         [Display(Name = "כתובת מייל")]
         [Required(ErrorMessage = "הזן כתובת מייל")]
@@ -47,7 +47,7 @@ namespace shabat2.Models
         public List<FoodByGuest> Foods { get; set; }
 
         // המרת התמונה לבייטים
-        public IFormFile SetPhoto { set {if(value!=null) Photo = new ParsePhoto().Get(value); } }
+        //public IFormFile SetPhoto { set {if(value!=null) Photo = new ParsePhoto().Get(value); } }
 
         // הוספת מאכל לרשימת מאכלים
         public void AddFood(Food food)

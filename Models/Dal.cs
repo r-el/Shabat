@@ -37,7 +37,7 @@ namespace shabat2.Models
         {
             Category category = new Category { CategoryName = "שתיה קלה" };
             Categories.Add(category);
-            Guests.Add(new Guest { FirstName = "אברהם", LastName = "קהאן" });
+            //Guests.Add(new Guest { FirstName = "אברהם", LastName = "קהאן", Mail="a@a.com", Password="1234" });
             SaveChanges();
         }
 

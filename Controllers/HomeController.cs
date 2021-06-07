@@ -24,6 +24,21 @@ namespace shabat2.Controllers
             return View(categories);
         }
 
+        public IActionResult Connect()
+        {// התחברות
+            return View(new Guest());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Connect(Guest guest)
+        {
+            // בדוק שהמייל והסיסמא נכונים
+            Guest guest1 = DAL.Get.Guests.ToList().Find(g => g.Mail == guest.Mail && g.Password == guest.Password); ;
+            if (guest1 == null) return View(); // ודא קבלת ערך
+            DAL.Get.Guest = guest1;
+            return View("Index");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register(Guest guest)
